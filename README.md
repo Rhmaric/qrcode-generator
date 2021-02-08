@@ -6,13 +6,13 @@ very small python script to generate qrcode images
 
 ### Technical Requirements
 
-- Your Python's version must be greater than 2.7.10 or (3.9.1 if your are using Python3)
-run `$ python --version` to check your Python's version
+- Your Python's version must be greater than 2.7.10 or (3.9.1 if your are using Python3). 
+Run `$ python --version` to check your Python's version
 
 - Make sure `virtualenv` is installed - see [installation guide](https://virtualenv.pypa.io/en/latest/installation.html)
 
-- Make sure a Python virtual env exists for your project
-`$ virtualenv env`
+- Make sure a Python virtual env exists for your project. 
+Run `$ virtualenv env` to create one
 
 ### Activate Python VirtualEnv
 
@@ -32,15 +32,15 @@ Freeze pip dependencies:
 ---
 
 ### Usage
-Run `$ python src/generate.py -p <csvFilePath> -d <qrCodeDestination> -f <qrCodePrefix>` 
+Run `$ python src/generate.py <csvFilePath> -d <qrCodeDestination> -p <qrCodePrefix>` 
 
 ### Command line arguments
 
-- **csvFilePath** (option `-p` or `--path`): this is the path to your csv file. This csv file must contain unique ids in a single row.
+- **csvFilePath**: this is the path to your csv file. This csv file must contain unique ids in a single row.
 
-- **qrCodeDestination** (option `-d` or `--dest`): this is the path where all the generated QRcodes will be stored
+- **qrCodeDestination** (option `-d` or `--dest`): [optional] this is the path where all the generated QRcodes will be stored
 
-- **qrCodePrefix** (option `-f` or `--prefix`): [optional] you can provide a prefix (e.g an url) that will be added to the qrCode encryted data 
+- **qrCodePrefix** (option `-p` or `--prefix`): [optional] you can provide a prefix (e.g an url) that will be added to each qrCode encryted data 
 
 - Help command
 Run `$ python src/generate.py -h` for information

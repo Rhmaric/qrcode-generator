@@ -7,7 +7,7 @@
 
 import qrcode
 import csv
-import sys, getopt
+import argparse
 from classes.qrcode import QRCodeFactory
 
 def generate(csvPath, qrCodeDest, qrCodePrefix, iconPath='assets/icons'):
@@ -15,10 +15,10 @@ def generate(csvPath, qrCodeDest, qrCodePrefix, iconPath='assets/icons'):
     factory = QRCodeFactory(
         qrCodePrefix,
         qrCodeDest,
-        version=12,
-        error_correction=qrcode.constants.ERROR_CORRECT_M,
-        box_size=2,
-        border=8
+        version=7,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=10,
+        border=4
     )
 
     with open(csvPath, newline='') as csvfile:
@@ -28,30 +28,20 @@ def generate(csvPath, qrCodeDest, qrCodePrefix, iconPath='assets/icons'):
                 if id:
                     factory.makeQRCode(data=id)
 
-def getArgs(argv):
-    csvPath = ''
-    qrCodeDest = 'assets/qrcode'
-    qrCodePrefix = ''
+def parseArgs():
+    parser = argparse.ArgumentParser(description='Command to generate unique QRcodes from a csv file')
+    parser.add_argument('csvPath', type=str, default='', help='path to the csv file')
+    parser.add_argument('-d', '--dest', dest='qrCodeDest', type=str, default='assets/qrcode',
+        help='path where all the generated QRcodes will be stored')
+    parser.add_argument('-p', '--prefix', dest='qrCodePrefix', type=str, default='',
+        help='prefix that will be added to each qrCode data')
+    args = parser.parse_args()
     
-    try:
-        opts, args = getopt.getopt(argv, "hp:d:f:",["path=","dest=", "prefix="])
-    except getopt.GetoptError:
-        print('generate.py -p <csvFilePath> -d <qrCodeDestination> -f <qrCodePrefix>')
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt == '-h':
-            print('generate.py -p <csvFilePath> -d <qrCodeDestination> -f <qrCodePrefix>')
-            sys.exit()
-        elif opt in ("-p", "--path"):
-            csvPath = str(arg)
-        elif opt in ("-d", "--dest"):
-            qrCodeDest = str(arg)
-        elif opt in ("-f", "--prefix"):
-            qrCodePrefix = str(arg)
-
-    return [csvPath, qrCodeDest, qrCodePrefix]
+    return [args.csvPath, args.qrCodeDest, args.qrCodePrefix]
 
 
 if __name__ == '__main__':
-    csvPath, qrCodeDest, qrCodePrefix = getArgs(sys.argv[1:])
+    # Parse command line arguments
+    csvPath, qrCodeDest, qrCodePrefix = parseArgs()
+    # Generate QRCodes
     generate(csvPath, qrCodeDest, qrCodePrefix)
