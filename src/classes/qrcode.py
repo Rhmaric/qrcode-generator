@@ -17,10 +17,10 @@ class QRCodeFactory:
 
     def makeQRCode(self, data):
         qr = qrcode.QRCode(
-            version=12,
-            error_correction=qrcode.constants.ERROR_CORRECT_H,
-            box_size=2,
-            border=8
+            version=self.version,
+            error_correction=self.error_correction,
+            box_size=self.box_size,
+            border=self.border
         )
         qr.add_data(f'{self.prefix}{data}')
         qr.make()

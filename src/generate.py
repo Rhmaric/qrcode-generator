@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# see https://note.nkmk.me/en/python-pillow-qrcode/ for more information
 
 ################################################################################
 ############################## QRcode Generator ################################
@@ -9,13 +10,13 @@ import csv
 import sys, getopt
 from classes.qrcode import QRCodeFactory
 
-def generate(csvPath, qrCodeDest =  'assets/qrcode', qrCodePrefix =  '', iconPath = 'assets/icons'):
+def generate(csvPath, qrCodeDest, qrCodePrefix, iconPath='assets/icons'):
     # TODO : add feature iconPath
     factory = QRCodeFactory(
         qrCodePrefix,
         qrCodeDest,
         version=12,
-        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        error_correction=qrcode.constants.ERROR_CORRECT_M,
         box_size=2,
         border=8
     )
@@ -29,7 +30,7 @@ def generate(csvPath, qrCodeDest =  'assets/qrcode', qrCodePrefix =  '', iconPat
 
 def getArgs(argv):
     csvPath = ''
-    qrCodeDest = ''
+    qrCodeDest = 'assets/qrcode'
     qrCodePrefix = ''
     
     try:
@@ -53,4 +54,4 @@ def getArgs(argv):
 
 if __name__ == '__main__':
     csvPath, qrCodeDest, qrCodePrefix = getArgs(sys.argv[1:])
-    generate(csvPath, qrCodeDest=qrCodeDest, qrCodePrefix=qrCodePrefix)
+    generate(csvPath, qrCodeDest, qrCodePrefix)
