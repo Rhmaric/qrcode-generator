@@ -18,23 +18,29 @@ run `$ python --version` to check your Python's version
 
 `$ source env/bin/activate`
 
-Deactivate : 
+Deactivate: 
 `$ deactivate`
 
 ### Install Pip requirements
 
 `$ pip install -r requirements.txt`
 
-Freeze pip dependencies : 
+Freeze pip dependencies: 
 `$ pip freeze > requirements.txt`
 
 ## Generate QRcode script
 ---
 
 ### Usage
-Run `$ python generate.py` 
+Run `$ python src/generate.py -p <csvFilePath> -d <qrCodeDestination> -f <qrCodePrefix>` 
 
 ### Command line arguments
 
+- **csvFilePath** (option `-p` or `--path`): this is the path to your csv file. This csv file must contain unique ids in a single row.
+
+- **qrCodeDestination** (option `-d` or `--dest`): this is the path where all the generated QRcodes will be stored
+
+- **qrCodePrefix** (option `-f` or `--prefix`): [optional] you can provide a prefix (e.g an url) that will be added to the qrCode encryted data 
+
 - Help command
-Run `$ generate.py -h` for information
+Run `$ python src/generate.py -h` for information
