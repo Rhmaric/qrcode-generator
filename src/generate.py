@@ -10,11 +10,12 @@ import csv
 import argparse
 from classes.qrcode import QRCodeFactory
 
-def generate(csvPath, qrCodeDest, qrCodePrefix, iconPath='assets/icons'):
+def generate(csvPath, qrCodeDest, qrCodePrefix, addQrCodeLabel, iconPath='assets/icons'):
     # TODO : add feature iconPath
     factory = QRCodeFactory(
         qrCodePrefix,
         qrCodeDest,
+        addQrCodeLabel,
         version=7,
         error_correction=qrcode.constants.ERROR_CORRECT_H,
         box_size=10,
@@ -35,13 +36,15 @@ def parseArgs():
         help='path where all the generated QRcodes will be stored')
     parser.add_argument('-p', '--prefix', dest='qrCodePrefix', type=str, default='',
         help='prefix that will be added to each qrCode data')
+    parser.add_argument('-l', '--label', dest='addQrCodeLabel', type=bool, default=False,
+        help='whether to add label to each qrCode image')
     args = parser.parse_args()
     
-    return [args.csvPath, args.qrCodeDest, args.qrCodePrefix]
+    return [args.csvPath, args.qrCodeDest, args.qrCodePrefix, args.addQrCodeLabel]
 
 
 if __name__ == '__main__':
     # Parse command line arguments
-    csvPath, qrCodeDest, qrCodePrefix = parseArgs()
+    csvPath, qrCodeDest, qrCodePrefix, addQrCodeLabel = parseArgs()
     # Generate QRCodes
-    generate(csvPath, qrCodeDest, qrCodePrefix)
+    generate(csvPath, qrCodeDest, qrCodePrefix, addQrCodeLabel)
