@@ -37,10 +37,13 @@ class QRCodeFactory:
         qr.add_data(f'{self.prefix}{data}')
         qr.make()
         img = qr.make_image().convert('RGB')
-        # Add bottom-centered text label
-        draw = ImageDraw.Draw(img)
-        W, H = img.size
-        w, h = draw.textsize(data)
-        draw.text(((W-w)/2, H-5*h/2), data, self.labelColor, font=self.labelFont)
+
+        if self.addLabel:
+            # Add bottom-centered text label
+            draw = ImageDraw.Draw(img)
+            W, H = img.size
+            w, h = draw.textsize(data)
+            draw.text(((W-w)/2, H-5*h/2), data, self.labelColor, font=self.labelFont)
+        
         # Save image
         img.save(f'{self.dest}/{data}.png')
