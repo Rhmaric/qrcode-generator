@@ -32,15 +32,17 @@ Freeze pip dependencies:
 ---
 
 ### Usage
-Run `$ python src/generate.py <csvFilePath> -d <qrCodeDestination> -p <qrCodePrefix>` 
+Run `$ python src/generate.py <csvFilePath> -d <qrCodeDestination> -p <qrCodePrefix> -l <addQrCodeLabel>` 
 
 ### Command line arguments
 
-- **csvFilePath**: this is the path to your csv file. This csv file must contain unique ids in a single row.
+- **csvFilePath**: [path] this is the path to your csv file. This csv file must contain unique ids in a single row.
 
-- **qrCodeDestination** (option `-d` or `--dest`): [optional] this is the path where all the generated QRcodes will be stored
+- **qrCodeDestination** (option `-d` or `--dest`): [path] this is the path where all the generated QRcodes will be stored
 
-- **qrCodePrefix** (option `-p` or `--prefix`): [optional] you can provide a prefix (e.g an url) that will be added to each qrCode encryted data 
+- **qrCodePrefix** (option `-p` or `--prefix`): [string] you can provide a prefix (e.g an url) that will be added to each qrCode encryted data
+
+- **addQrCodeLabel** (option `-l` or `--label`): [boolean] you can add a label on each QRCode image. This feature is disabled by default. Label will be added to the bottom center of each qrCode image 
 
 - Help command
 Run `$ python src/generate.py -h` for information
